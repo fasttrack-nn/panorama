@@ -1,0 +1,103 @@
+Computing ground truth for 10% subset (100000 vectors)...
+Database: 100000 x 960, Queries: 1000, Train: 50000
+====== IVFPQ (M=960)
+	nprobe   1, Recall@10: 0.102300, speed: 0.649992 ms/query, QPS: 1538.5, dims scanned: 100.0%
+	nprobe   2, Recall@10: 0.187000, speed: 1.202590 ms/query, QPS: 831.5, dims scanned: 100.0%
+	nprobe   4, Recall@10: 0.327900, speed: 2.303402 ms/query, QPS: 434.1, dims scanned: 100.0%
+	nprobe   8, Recall@10: 0.516600, speed: 4.440608 ms/query, QPS: 225.2, dims scanned: 100.0%
+	nprobe  16, Recall@10: 0.707400, speed: 8.847446 ms/query, QPS: 113.0, dims scanned: 100.0%
+	nprobe  32, Recall@10: 0.813400, speed: 17.687788 ms/query, QPS: 56.5, dims scanned: 100.0%
+	nprobe  64, Recall@10: 0.834700, speed: 33.963051 ms/query, QPS: 29.4, dims scanned: 100.0%
+  Energy spill: total=2.0, cap=0.2 (multiplier=2.0)
+    Level  0:        1.5 ->        0.2 [spilled]
+    Level  1:        0.2 ->        0.2
+    Level  2:        0.1 ->        0.2
+    Level  3:        0.1 ->        0.2
+    Level  4:        0.0 ->        0.2
+    Level  5:        0.0 ->        0.2
+    Level  6:        0.0 ->        0.2
+    Level  7:        0.0 ->        0.2
+    Level  8:        0.0 ->        0.0
+    Level  9:        0.0 ->        0.0
+    Level 10:        0.0 ->        0.0
+    Level 11:        0.0 ->        0.0
+    Level 12:        0.0 ->        0.0
+    Level 13:        0.0 ->        0.0
+    Level 14:        0.0 ->        0.0
+    Level 15:        0.0 ->        0.0
+====== PCA+Spill+Rot + IVFPQPanorama (M=960)
+	nprobe   1, Recall@10: 0.101700, speed: 0.301291 ms/query, QPS: 3319.0, dims scanned: 50.0%
+	nprobe   2, Recall@10: 0.192200, speed: 0.418401 ms/query, QPS: 2390.1, dims scanned: 43.9%
+	nprobe   4, Recall@10: 0.339700, speed: 0.653680 ms/query, QPS: 1529.8, dims scanned: 39.7%
+	nprobe   8, Recall@10: 0.533400, speed: 1.051991 ms/query, QPS: 950.6, dims scanned: 36.1%
+	nprobe  16, Recall@10: 0.733300, speed: 1.741716 ms/query, QPS: 574.1, dims scanned: 32.8%
+	nprobe  32, Recall@10: 0.850100, speed: 2.894893 ms/query, QPS: 345.4, dims scanned: 29.1%
+	nprobe  64, Recall@10: 0.875200, speed: 4.589738 ms/query, QPS: 217.9, dims scanned: 24.2%
+====== IVFPQ (M=480)
+	nprobe   1, Recall@10: 0.089200, speed: 0.329323 ms/query, QPS: 3036.5, dims scanned: 100.0%
+	nprobe   2, Recall@10: 0.154800, speed: 0.544090 ms/query, QPS: 1837.9, dims scanned: 100.0%
+	nprobe   4, Recall@10: 0.261800, speed: 0.977627 ms/query, QPS: 1022.9, dims scanned: 100.0%
+	nprobe   8, Recall@10: 0.383100, speed: 1.901174 ms/query, QPS: 526.0, dims scanned: 100.0%
+	nprobe  16, Recall@10: 0.478500, speed: 3.654595 ms/query, QPS: 273.6, dims scanned: 100.0%
+	nprobe  32, Recall@10: 0.520800, speed: 7.264649 ms/query, QPS: 137.7, dims scanned: 100.0%
+	nprobe  64, Recall@10: 0.526800, speed: 14.062331 ms/query, QPS: 71.1, dims scanned: 100.0%
+  Energy spill: total=2.0, cap=0.2 (multiplier=2.0)
+    Level  0:        1.5 ->        0.2 [spilled]
+    Level  1:        0.2 ->        0.2
+    Level  2:        0.1 ->        0.2
+    Level  3:        0.1 ->        0.2
+    Level  4:        0.0 ->        0.2
+    Level  5:        0.0 ->        0.2
+    Level  6:        0.0 ->        0.2
+    Level  7:        0.0 ->        0.2
+    Level  8:        0.0 ->        0.0
+    Level  9:        0.0 ->        0.0
+    Level 10:        0.0 ->        0.0
+    Level 11:        0.0 ->        0.0
+    Level 12:        0.0 ->        0.0
+    Level 13:        0.0 ->        0.0
+    Level 14:        0.0 ->        0.0
+    Level 15:        0.0 ->        0.0
+====== PCA+Spill+Rot + IVFPQPanorama (M=480)
+	nprobe   1, Recall@10: 0.089800, speed: 0.172976 ms/query, QPS: 5781.1, dims scanned: 50.1%
+	nprobe   2, Recall@10: 0.156700, speed: 0.243873 ms/query, QPS: 4100.5, dims scanned: 44.0%
+	nprobe   4, Recall@10: 0.261200, speed: 0.354269 ms/query, QPS: 2822.7, dims scanned: 39.8%
+	nprobe   8, Recall@10: 0.380100, speed: 0.554475 ms/query, QPS: 1803.5, dims scanned: 36.2%
+	nprobe  16, Recall@10: 0.464800, speed: 0.874947 ms/query, QPS: 1142.9, dims scanned: 32.9%
+	nprobe  32, Recall@10: 0.503900, speed: 1.424663 ms/query, QPS: 701.9, dims scanned: 29.1%
+	nprobe  64, Recall@10: 0.511000, speed: 2.234310 ms/query, QPS: 447.6, dims scanned: 24.3%
+====== IVFPQ (M=240)
+	nprobe   1, Recall@10: 0.071800, speed: 0.174776 ms/query, QPS: 5721.6, dims scanned: 100.0%
+	nprobe   2, Recall@10: 0.118500, speed: 0.281147 ms/query, QPS: 3556.9, dims scanned: 100.0%
+	nprobe   4, Recall@10: 0.173300, speed: 0.454294 ms/query, QPS: 2201.2, dims scanned: 100.0%
+	nprobe   8, Recall@10: 0.215000, speed: 0.824370 ms/query, QPS: 1213.0, dims scanned: 100.0%
+	nprobe  16, Recall@10: 0.230300, speed: 1.540917 ms/query, QPS: 649.0, dims scanned: 100.0%
+	nprobe  32, Recall@10: 0.236100, speed: 2.907496 ms/query, QPS: 343.9, dims scanned: 100.0%
+	nprobe  64, Recall@10: 0.236800, speed: 5.643468 ms/query, QPS: 177.2, dims scanned: 100.0%
+  Energy spill: total=2.0, cap=0.2 (multiplier=2.0)
+    Level  0:        1.5 ->        0.2 [spilled]
+    Level  1:        0.2 ->        0.2
+    Level  2:        0.1 ->        0.2
+    Level  3:        0.1 ->        0.2
+    Level  4:        0.0 ->        0.2
+    Level  5:        0.0 ->        0.2
+    Level  6:        0.0 ->        0.2
+    Level  7:        0.0 ->        0.2
+    Level  8:        0.0 ->        0.0
+    Level  9:        0.0 ->        0.0
+    Level 10:        0.0 ->        0.0
+    Level 11:        0.0 ->        0.0
+    Level 12:        0.0 ->        0.0
+    Level 13:        0.0 ->        0.0
+    Level 14:        0.0 ->        0.0
+    Level 15:        0.0 ->        0.0
+====== PCA+Spill+Rot + IVFPQPanorama (M=240)
+	nprobe   1, Recall@10: 0.068400, speed: 0.123380 ms/query, QPS: 8105.1, dims scanned: 50.8%
+	nprobe   2, Recall@10: 0.106800, speed: 0.163641 ms/query, QPS: 6110.9, dims scanned: 44.8%
+	nprobe   4, Recall@10: 0.150700, speed: 0.228846 ms/query, QPS: 4369.8, dims scanned: 40.6%
+	nprobe   8, Recall@10: 0.181100, speed: 0.354552 ms/query, QPS: 2820.5, dims scanned: 37.1%
+	nprobe  16, Recall@10: 0.196000, speed: 0.528518 ms/query, QPS: 1892.1, dims scanned: 33.7%
+	nprobe  32, Recall@10: 0.204000, speed: 0.838608 ms/query, QPS: 1192.5, dims scanned: 29.9%
+	nprobe  64, Recall@10: 0.204000, speed: 1.310241 ms/query, QPS: 763.2, dims scanned: 24.9%
+
+Benchmark complete! Plot saved to bench_ivfpq_panorama.png

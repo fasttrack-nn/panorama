@@ -1,0 +1,115 @@
+{
+  "nq": 100,
+  "k": 10,
+  "datasets": {
+    "gist1m": {
+      "experiments": [
+        {
+          "index_type": "naive",
+          "build_params": {},
+          "search_params": {}
+        },
+        {
+          "index_type": "naive_pano",
+          "build_params": {
+            "nlevels": [
+              8
+            ]
+          },
+          "search_params": {}
+        },
+        {
+          "index_type": "ivf_flat",
+          "build_params": {
+            "nlist": [
+              128
+            ]
+          },
+          "search_params": {
+            "nprobe": [
+              1,
+              4,
+              8,
+              32
+            ]
+          }
+        },
+        {
+          "index_type": "ivf_flat_pano",
+          "build_params": {
+            "nlist": [
+              128
+            ],
+            "nlevels": [
+              8,
+              16
+            ]
+          },
+          "search_params": {
+            "nprobe": [
+              1,
+              4,
+              8,
+              32
+            ]
+          }
+        },
+        {
+          "index_type": "hnsw",
+          "build_params": {
+            "M_HNSW": [
+              16
+            ],
+            "efConstruction": [
+              40
+            ]
+          },
+          "search_params": {
+            "efSearch": [
+              32,
+              64,
+              128
+            ]
+          }
+        },
+        {
+          "index_type": "hnsw_pano",
+          "build_params": {
+            "M_HNSW": [
+              16
+            ],
+            "efConstruction": [
+              40
+            ],
+            "nlevels": [
+              8
+            ]
+          },
+          "search_params": {
+            "efSearch": [
+              32,
+              64,
+              128
+            ]
+          }
+        },
+        {
+          "index_type": "pdx_ivf",
+          "build_params": {
+            "nlist": [
+              128
+            ]
+          },
+          "search_params": {
+            "nprobe": [
+              1,
+              4,
+              8,
+              32
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

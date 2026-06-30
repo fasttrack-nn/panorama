@@ -1,0 +1,18 @@
+---
+description: Core project rules for the panorama repo
+alwaysApply: true
+---
+
+# Faiss Project Rules
+
+## Building
+
+Always build faiss using the `helper-build.sh` script at the repo root. Never run cmake/make commands directly.
+
+```bash
+./helper-build.sh
+```
+
+## Code Changes
+
+When modifying code, preserve all existing comments that still apply after the change. Only remove a comment if it is made entirely obsolete or incorrect by the new code.

@@ -1,0 +1,52 @@
+Computing ground truth for 10% subset (100000 vectors)...
+Database: 100000 x 960, Queries: 1000, Train: 50000
+====== IVFPQ (M=960)
+	nprobe   1, Recall@10: 0.102300, speed: 0.658641 ms/query, QPS: 1518.3, dims scanned: 100.0%
+	nprobe   2, Recall@10: 0.187000, speed: 1.212606 ms/query, QPS: 824.7, dims scanned: 100.0%
+	nprobe   4, Recall@10: 0.327900, speed: 2.326981 ms/query, QPS: 429.7, dims scanned: 100.0%
+	nprobe   8, Recall@10: 0.516600, speed: 4.530427 ms/query, QPS: 220.7, dims scanned: 100.0%
+	nprobe  16, Recall@10: 0.707400, speed: 8.961836 ms/query, QPS: 111.6, dims scanned: 100.0%
+	nprobe  32, Recall@10: 0.813400, speed: 17.749148 ms/query, QPS: 56.3, dims scanned: 100.0%
+	nprobe  64, Recall@10: 0.834700, speed: 34.237200 ms/query, QPS: 29.2, dims scanned: 100.0%
+====== PCA + IVFPQPanorama (M=960)
+	nprobe   1, Recall@10: 0.099200, speed: 0.247902 ms/query, QPS: 4033.8, dims scanned: 27.9%
+	nprobe   2, Recall@10: 0.184000, speed: 0.323462 ms/query, QPS: 3091.6, dims scanned: 20.2%
+	nprobe   4, Recall@10: 0.319600, speed: 0.435754 ms/query, QPS: 2294.9, dims scanned: 15.4%
+	nprobe   8, Recall@10: 0.497300, speed: 0.595506 ms/query, QPS: 1679.2, dims scanned: 12.3%
+	nprobe  16, Recall@10: 0.667300, speed: 0.848157 ms/query, QPS: 1179.0, dims scanned: 10.2%
+	nprobe  32, Recall@10: 0.762300, speed: 1.144784 ms/query, QPS: 873.5, dims scanned: 8.8%
+	nprobe  64, Recall@10: 0.783500, speed: 1.666677 ms/query, QPS: 600.0, dims scanned: 7.7%
+====== IVFPQ (M=480)
+	nprobe   1, Recall@10: 0.089200, speed: 0.316833 ms/query, QPS: 3156.2, dims scanned: 100.0%
+	nprobe   2, Recall@10: 0.154800, speed: 0.534568 ms/query, QPS: 1870.7, dims scanned: 100.0%
+	nprobe   4, Recall@10: 0.261800, speed: 0.992897 ms/query, QPS: 1007.2, dims scanned: 100.0%
+	nprobe   8, Recall@10: 0.383100, speed: 1.897727 ms/query, QPS: 526.9, dims scanned: 100.0%
+	nprobe  16, Recall@10: 0.478500, speed: 3.697742 ms/query, QPS: 270.4, dims scanned: 100.0%
+	nprobe  32, Recall@10: 0.520800, speed: 7.227001 ms/query, QPS: 138.4, dims scanned: 100.0%
+	nprobe  64, Recall@10: 0.526800, speed: 14.043146 ms/query, QPS: 71.2, dims scanned: 100.0%
+====== PCA + IVFPQPanorama (M=480)
+	nprobe   1, Recall@10: 0.074000, speed: 0.154871 ms/query, QPS: 6457.0, dims scanned: 28.0%
+	nprobe   2, Recall@10: 0.129600, speed: 0.193088 ms/query, QPS: 5179.0, dims scanned: 20.2%
+	nprobe   4, Recall@10: 0.206000, speed: 0.253136 ms/query, QPS: 3950.4, dims scanned: 15.5%
+	nprobe   8, Recall@10: 0.279100, speed: 0.337133 ms/query, QPS: 2966.2, dims scanned: 12.3%
+	nprobe  16, Recall@10: 0.316800, speed: 0.453540 ms/query, QPS: 2204.9, dims scanned: 10.2%
+	nprobe  32, Recall@10: 0.331600, speed: 0.663388 ms/query, QPS: 1507.4, dims scanned: 8.8%
+	nprobe  64, Recall@10: 0.332500, speed: 0.893971 ms/query, QPS: 1118.6, dims scanned: 7.7%
+====== IVFPQ (M=240)
+	nprobe   1, Recall@10: 0.071800, speed: 0.181070 ms/query, QPS: 5522.7, dims scanned: 100.0%
+	nprobe   2, Recall@10: 0.118500, speed: 0.277585 ms/query, QPS: 3602.5, dims scanned: 100.0%
+	nprobe   4, Recall@10: 0.173300, speed: 0.473572 ms/query, QPS: 2111.6, dims scanned: 100.0%
+	nprobe   8, Recall@10: 0.215000, speed: 0.830067 ms/query, QPS: 1204.7, dims scanned: 100.0%
+	nprobe  16, Recall@10: 0.230300, speed: 1.537085 ms/query, QPS: 650.6, dims scanned: 100.0%
+	nprobe  32, Recall@10: 0.236100, speed: 2.982338 ms/query, QPS: 335.3, dims scanned: 100.0%
+	nprobe  64, Recall@10: 0.236800, speed: 5.685536 ms/query, QPS: 175.9, dims scanned: 100.0%
+====== PCA + IVFPQPanorama (M=240)
+	nprobe   1, Recall@10: 0.048800, speed: 0.099187 ms/query, QPS: 10082.0, dims scanned: 28.3%
+	nprobe   2, Recall@10: 0.072300, speed: 0.128332 ms/query, QPS: 7792.3, dims scanned: 20.5%
+	nprobe   4, Recall@10: 0.096400, speed: 0.163670 ms/query, QPS: 6109.9, dims scanned: 15.6%
+	nprobe   8, Recall@10: 0.109500, speed: 0.209467 ms/query, QPS: 4774.0, dims scanned: 12.5%
+	nprobe  16, Recall@10: 0.116200, speed: 0.293862 ms/query, QPS: 3403.0, dims scanned: 10.3%
+	nprobe  32, Recall@10: 0.116500, speed: 0.421258 ms/query, QPS: 2373.8, dims scanned: 8.8%
+	nprobe  64, Recall@10: 0.116100, speed: 0.529513 ms/query, QPS: 1888.5, dims scanned: 7.7%
+
+Benchmark complete! Plot saved to bench_ivfpq_panorama.png

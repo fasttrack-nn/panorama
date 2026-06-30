@@ -1,0 +1,75 @@
+nq: 1000
+k: 10
+
+datasets:
+  sift10m:
+    experiments:
+      - index_type: ivfpq
+        build_params: { nlist: [1024], M: [128] }
+        search_params: { nprobe: [1, 2, 3, 4, 6, 8, 12, 16, 24, 32, 48, 64, 96, 128, 256, 512, 1024] }
+      - index_type: ivfpq_pano
+        build_params: { nlist: [1024], M: [128], nlevels: [8], alpha: [2, 4, 8] }
+        search_params: { nprobe: [1, 2, 3, 4, 6, 8, 12, 16, 24, 32, 48, 64, 96, 128, 256, 512, 1024] }
+
+  gist1m:
+    experiments:
+      - index_type: ivfpq
+        build_params: { nlist: [128], M: [960] }
+        search_params: { nprobe: [1, 2, 4, 6, 8, 12, 16, 20, 24, 28, 32, 40, 52, 64, 88, 128] }
+      - index_type: ivfpq_pano
+        build_params: { nlist: [128], M: [960], nlevels: [16], alpha: [2, 4, 8] }
+        search_params: { nprobe: [1, 2, 4, 6, 8, 12, 16, 20, 24, 28, 32, 40, 52, 64, 88, 128] }
+
+  openai:
+    experiments:
+      - index_type: ivfpq
+        build_params: { nlist: [128], M: [3072] }
+        search_params: { nprobe: [1, 2, 4, 6, 8, 12, 16, 20, 24, 28, 32, 40, 52, 64, 88, 128] }
+      - index_type: ivfpq_pano
+        build_params: { nlist: [128], M: [3072], nlevels: [32], alpha: [2, 4, 8] }
+        search_params: { nprobe: [1, 2, 4, 6, 8, 12, 16, 20, 24, 28, 32, 40, 52, 64, 88, 128] }
+
+  ada002:
+    experiments:
+      - index_type: ivfpq
+        build_params: { nlist: [128], M: [1536] }
+        search_params: { nprobe: [1, 2, 4, 6, 8, 12, 16, 20, 24, 28, 32, 40, 52, 64, 88, 128] }
+      - index_type: ivfpq_pano
+        build_params: { nlist: [128], M: [1536], nlevels: [16], alpha: [2, 4, 8] }
+        search_params: { nprobe: [1, 2, 4, 6, 8, 12, 16, 20, 24, 28, 32, 40, 52, 64, 88, 128] }
+
+  contriever:
+    experiments:
+      - index_type: ivfpq
+        build_params: { nlist: [128], M: [768] }
+        search_params: { nprobe: [1, 2, 4, 6, 8, 12, 16, 20, 24, 28, 32, 40, 52, 64, 88, 128] }
+      - index_type: ivfpq_pano
+        build_params: { nlist: [128], M: [768], nlevels: [16], alpha: [2, 4, 8] }
+        search_params: { nprobe: [1, 2, 4, 6, 8, 12, 16, 20, 24, 28, 32, 40, 52, 64, 88, 128] }
+
+  arxiv:
+    experiments:
+      - index_type: ivfpq
+        build_params: { nlist: [256], M: [768] }
+        search_params: { nprobe: [1, 2, 4, 6, 8, 12, 16, 20, 24, 28, 32, 40, 52, 64, 88, 128, 256] }
+      - index_type: ivfpq_pano
+        build_params: { nlist: [256], M: [768], nlevels: [16], alpha: [2, 4, 8] }
+        search_params: { nprobe: [1, 2, 4, 6, 8, 12, 16, 20, 24, 28, 32, 40, 52, 64, 88, 128, 256] }
+
+  deep:
+    experiments:
+      - index_type: ivfpq
+        build_params: { nlist: [1024], M: [96] }
+        search_params: { nprobe: [1, 2, 4, 6, 8, 12, 16, 20, 24, 28, 32, 40, 52, 64, 88, 128, 256, 512, 1024] }
+      - index_type: ivfpq_pano
+        build_params: { nlist: [1024], M: [96], nlevels: [4], alpha: [2, 4, 8] }
+        search_params: { nprobe: [1, 2, 4, 6, 8, 12, 16, 20, 24, 28, 32, 40, 52, 64, 88, 128, 256, 512, 1024] }
+
+  fashionmnist:
+    experiments:
+      - index_type: ivfpq
+        build_params: { nlist: [128], M: [784] }
+        search_params: { nprobe: [1, 2, 4, 6, 8, 12, 16, 20, 24, 28, 32, 40, 52, 64, 88, 128] }
+      - index_type: ivfpq_pano
+        build_params: { nlist: [128], M: [784], nlevels: [16], alpha: [2, 4, 8] }
+        search_params: { nprobe: [1, 2, 4, 6, 8, 12, 16, 20, 24, 28, 32, 40, 52, 64, 88, 128] }

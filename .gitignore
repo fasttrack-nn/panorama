@@ -1,0 +1,6 @@
+/.vscode/
+/.cursor/
+/target
+__pycache__/
+venv
+data/datasets/

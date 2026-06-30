@@ -1,0 +1,91 @@
+[build-system]
+requires = ["scikit-build-core>=0.3.3", "pybind11>=2.10.0"]
+build-backend = "scikit_build_core.build"
+
+[project]
+name = "superkmeans"
+version = "0.1.0"
+description = "A Super fast K-Means library for High-Dimensional vectors on CPUs (x86, ARM) and GPUs"
+readme = "README.md"
+requires-python = ">=3.8"
+authors = [
+    {name = "Leonardo Kuffo", email = "lxkr@cwi.nl"}
+]
+license = {text = "MIT"}
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: C++",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Scientific/Engineering",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+    "numpy>=1.20.0",
+    "scikit-learn>=1.8.0"
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "pytest-cov",
+    "black",
+    "mypy",
+]
+test = [
+    "pytest>=7.0",
+    "pytest-cov",
+]
+
+[project.urls]
+Homepage = "https://github.com/lkuffo/superkmeans"
+Repository = "https://github.com/lkuffo/superkmeans"
+
+[tool.scikit-build]
+cmake.source-dir = "."
+wheel.packages = ["python/superkmeans"]
+cmake.build-type = "Release"
+
+cmake.args = [
+    "-DSKMEANS_COMPILE_TESTS=OFF",
+    "-DSKMEANS_COMPILE_BENCHMARKS=OFF",
+    "-DSKMEANS_COMPILE_EXAMPLES=OFF"
+]
+
+[tool.pytest.ini_options]
+testpaths = ["python/tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+
+[tool.black]
+line-length = 100
+target-version = ['py38']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # directories
+  \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | build
+  | dist
+)/
+'''
+
+[tool.mypy]
+python_version = "3.8"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = false

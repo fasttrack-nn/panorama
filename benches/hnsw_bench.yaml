@@ -1,0 +1,93 @@
+nq: 1000
+k: 10
+
+datasets:
+  # sift10m:
+  #   experiments:
+  #     # - index_type: hnsw
+  #     #   build_params: { M_HNSW: [32], efConstruction: [40] }
+  #     #   search_params: { efSearch: [1, 2, 3, 4, 6, 8, 12, 16, 24, 32, 48, 64, 96, 128, 192, 256, 384, 512, 768, 1024] }
+  #     - index_type: hnsw_pano
+  #       build_params: { M_HNSW: [32], efConstruction: [40], nlevels: [4] }
+  #       search_params: { efSearch: [1, 2, 3, 4, 6, 8, 12, 16, 24, 32, 48, 64, 96, 128, 192, 256, 384, 512, 768, 1024] }
+  #     # - index_type: ads_hnsw
+  #     #   build_params: { M_HNSW: [8, 16], efConstruction: [40] }
+  #     #   search_params: { efSearch: [16, 32, 64, 128, 256, 512, 1024] }
+
+  # gist1m:
+  #   experiments:
+  #     # - index_type: hnsw
+  #     #   build_params: { M_HNSW: [32], efConstruction: [40] }
+  #     #   search_params: { efSearch: [1, 2, 3, 4, 6, 8, 12, 16, 24, 32, 48, 64, 96, 128, 192, 256, 384, 512, 768, 1024] }
+  #     - index_type: hnsw_pano
+  #       build_params: { M_HNSW: [32], efConstruction: [40], nlevels: [8] }
+  #       search_params: { efSearch: [1, 2, 3, 4, 6, 8, 12, 16, 24, 32, 48, 64, 96, 128, 192, 256, 384, 512, 768, 1024] }
+  #     # - index_type: ads_hnsw
+  #     #   build_params: { M_HNSW: [8, 16], efConstruction: [40] }
+  #     #   search_params: { efSearch: [16, 32, 64, 128, 256, 512, 1024] }
+
+  # openai:
+  #   experiments:
+  #     # - index_type: hnsw
+  #     #   build_params: { M_HNSW: [32], efConstruction: [40] }
+  #     #   search_params: { efSearch: [1, 2, 3, 4, 6, 8, 12, 16, 24, 32, 48, 64, 96, 128, 192, 256, 384, 512, 768, 1024] }
+  #     - index_type: hnsw_pano
+  #       build_params: { M_HNSW: [32], efConstruction: [40], nlevels: [8] }
+  #       search_params: { efSearch: [1, 2, 3, 4, 6, 8, 12, 16, 24, 32, 48, 64, 96, 128, 192, 256, 384, 512, 768, 1024] }
+  #     # - index_type: ads_hnsw
+  #     #   build_params: { M_HNSW: [8, 16], efConstruction: [40] }
+  #     #   search_params: { efSearch: [16, 32, 64, 128, 256, 512, 1024] }
+
+  # ada002:
+  #   experiments:
+  #     # - index_type: hnsw
+  #     #   build_params: { M_HNSW: [32], efConstruction: [40] }
+  #     #   search_params: { efSearch: [1, 2, 3, 4, 6, 8, 12, 16, 24, 32, 48, 64, 96, 128, 192, 256, 384, 512, 768, 1024] }
+  #     - index_type: hnsw_pano
+  #       build_params: { M_HNSW: [32], efConstruction: [40], nlevels: [8] }
+  #       search_params: { efSearch: [1, 2, 3, 4, 6, 8, 12, 16, 24, 32, 48, 64, 96, 128, 192, 256, 384, 512, 768, 1024] }
+  #     # - index_type: ads_hnsw
+  #     #   build_params: { M_HNSW: [8, 16], efConstruction: [40] }
+  #     #   search_params: { efSearch: [16, 32, 64, 128, 256, 512, 1024] }
+
+  # contriever:
+  #   experiments:
+  #     - index_type: hnsw
+  #       build_params: { M_HNSW: [32], efConstruction: [40] }
+  #       search_params: { efSearch: [1, 2, 3, 4, 6, 8, 12, 16, 24, 32, 48, 64, 96, 128, 192, 256, 384, 512, 768, 1024] }
+  #     - index_type: hnsw_pano
+  #       build_params: { M_HNSW: [32], efConstruction: [40], nlevels: [8] }
+  #       search_params: { efSearch: [1, 2, 3, 4, 6, 8, 12, 16, 24, 32, 48, 64, 96, 128, 192, 256, 384, 512, 768, 1024] }
+
+  # arxiv:
+  #   experiments:
+  #     - index_type: hnsw
+  #       build_params: { M_HNSW: [32], efConstruction: [40] }
+  #       search_params: { efSearch: [1, 2, 3, 4, 6, 8, 12, 16, 24, 32, 48, 64, 96, 128, 192, 256, 384, 512, 768, 1024] }
+  #     - index_type: hnsw_pano
+  #       build_params: { M_HNSW: [32], efConstruction: [40], nlevels: [8] }
+  #       search_params: { efSearch: [1, 2, 3, 4, 6, 8, 12, 16, 24, 32, 48, 64, 96, 128, 192, 256, 384, 512, 768, 1024] }
+
+  # fashionmnist:
+  #   experiments:
+  #     # - index_type: hnsw
+  #     #   build_params: { M_HNSW: [32], efConstruction: [40] }
+  #     #   search_params: { efSearch: [1, 2, 3, 4, 6, 8, 12, 16, 24, 32, 48, 64, 96, 128, 192, 256, 384, 512] }
+  #     - index_type: hnsw_pano
+  #       build_params: { M_HNSW: [32], efConstruction: [40], nlevels: [8] }
+  #       search_params: { efSearch: [1, 2, 3, 4, 6, 8, 12, 16, 24, 32, 48, 64, 96, 128, 192, 256, 384, 512] }
+  #     # - index_type: ads_hnsw
+  #     #   build_params: { M_HNSW: [8, 16], efConstruction: [40] }
+  #     #   search_params: { efSearch: [16, 32, 64, 128, 256, 512, 1024] }
+
+  deep:
+    experiments:
+      - index_type: hnsw
+        build_params: { M_HNSW: [32], efConstruction: [40] }
+        search_params: { efSearch: [1, 2, 3, 4, 6, 8, 12, 16, 24, 32, 48, 64, 96, 128, 192, 256, 384, 512, 768, 1024] }
+      - index_type: hnsw_pano
+        build_params: { M_HNSW: [32], efConstruction: [40], nlevels: [4] }
+        search_params: { efSearch: [1, 2, 3, 4, 6, 8, 12, 16, 24, 32, 48, 64, 96, 128, 192, 256, 384, 512, 768, 1024] }
+      # - index_type: ads_hnsw
+      #   build_params: { M_HNSW: [8, 16], efConstruction: [40] }
+      #   search_params: { efSearch: [16, 32, 64, 128, 256, 512, 1024] }

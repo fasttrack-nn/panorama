@@ -1,0 +1,298 @@
+/*
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+// -*- c++ -*-
+
+#ifndef INDEX_FLAT_H
+#define INDEX_FLAT_H
+
+#include <vector>
+
+#include <faiss/IndexFlatCodes.h>
+#include <faiss/impl/Panorama.h>
+
+namespace faiss {
+
+/** Index that stores the full vectors and performs exhaustive search */
+struct IndexFlat : IndexFlatCodes {
+    explicit IndexFlat(
+            idx_t d, ///< dimensionality of the input vectors
+            MetricType metric = METRIC_L2);
+
+    void search(
+            idx_t n,
+            const float* x,
+            idx_t k,
+            float* distances,
+            idx_t* labels,
+            const SearchParameters* params = nullptr) const override;
+
+    void range_search(
+            idx_t n,
+            const float* x,
+            float radius,
+            RangeSearchResult* result,
+            const SearchParameters* params = nullptr) const override;
+
+    void reconstruct(idx_t key, float* recons) const override;
+
+    /** compute distance with a subset of vectors
+     *
+     * @param x       query vectors, size n * d
+     * @param labels  indices of the vectors that should be compared
+     *                for each query vector, size n * k
+     * @param distances
+     *                corresponding output distances, size n * k
+     */
+    void compute_distance_subset(
+            idx_t n,
+            const float* x,
+            idx_t k,
+            float* distances,
+            const idx_t* labels) const;
+
+    // get pointer to the floating point data
+    float* get_xb() {
+        return (float*)codes.data();
+    }
+    const float* get_xb() const {
+        return (const float*)codes.data();
+    }
+
+    IndexFlat() {}
+
+    FlatCodesDistanceComputer* get_FlatCodesDistanceComputer() const override;
+
+    /* The standalone codec interface (just memcopies in this case) */
+    void sa_encode(idx_t n, const float* x, uint8_t* bytes) const override;
+
+    void sa_decode(idx_t n, const uint8_t* bytes, float* x) const override;
+};
+
+struct IndexFlatIP : IndexFlat {
+    explicit IndexFlatIP(idx_t d_in) : IndexFlat(d_in, METRIC_INNER_PRODUCT) {}
+    IndexFlatIP() {}
+};
+
+struct IndexFlatL2 : IndexFlat {
+    // Special cache for L2 norms.
+    // If this cache is set, then get_distance_computer() returns
+    // a special version that computes the distance using dot products
+    // and l2 norms.
+    std::vector<float> cached_l2norms;
+
+    /**
+     * @param d dimensionality of the input vectors
+     */
+    explicit IndexFlatL2(idx_t d_in) : IndexFlat(d_in, METRIC_L2) {}
+    IndexFlatL2() {}
+
+    // override for l2 norms cache.
+    FlatCodesDistanceComputer* get_FlatCodesDistanceComputer() const override;
+
+    // compute L2 norms
+    void sync_l2norms();
+    // clear L2 norms
+    void clear_l2norms();
+};
+
+struct IndexFlatPanorama : IndexFlat {
+    const size_t batch_size;
+    const size_t n_levels;
+    std::vector<float> cum_sums;
+    PanoramaFlat pano;
+
+    /**
+     * @param d dimensionality of the input vectors
+     * @param metric metric type
+     * @param n_levels number of Panorama levels
+     * @param batch_size batch size for Panorama storage
+     */
+    explicit IndexFlatPanorama(
+            idx_t d_in,
+            MetricType metric,
+            size_t n_levels_in,
+            size_t batch_size_in)
+            : IndexFlat(d_in, metric),
+              batch_size(batch_size_in),
+              n_levels(n_levels_in),
+              pano(d_in, n_levels_in, batch_size_in) {
+        FAISS_THROW_IF_NOT(
+                metric == METRIC_L2 || metric == METRIC_INNER_PRODUCT);
+    }
+
+    void add(idx_t n, const float* x) override;
+
+    void search(
+            idx_t n,
+            const float* x,
+            idx_t k,
+            float* distances,
+            idx_t* labels,
+            const SearchParameters* params = nullptr) const override;
+
+    void range_search(
+            idx_t n,
+            const float* x,
+            float radius,
+            RangeSearchResult* result,
+            const SearchParameters* params = nullptr) const override;
+
+    void search_subset(
+            idx_t n,
+            const float* x,
+            idx_t k_base,
+            const idx_t* base_labels,
+            idx_t k,
+            float* distances,
+            idx_t* labels) const override;
+
+    void reset() override;
+
+    void reconstruct(idx_t key, float* recons) const override;
+
+    void reconstruct_n(idx_t i, idx_t n, float* recons) const override;
+
+    size_t remove_ids(const IDSelector& sel) override;
+
+    void merge_from(Index& otherIndex, idx_t add_id) override;
+
+    void add_sa_codes(idx_t n, const uint8_t* codes_in, const idx_t* xids)
+            override;
+
+    void permute_entries(const idx_t* perm);
+
+    void set_epsilon(float eps) {
+        pano.epsilon = eps;
+    }
+};
+
+struct IndexFlatL2Panorama : IndexFlatPanorama {
+    /**
+     * @param d dimensionality of the input vectors
+     * @param n_levels number of Panorama levels
+     * @param batch_size batch size for Panorama storage
+     */
+    explicit IndexFlatL2Panorama(
+            idx_t d_in,
+            size_t n_levels_in,
+            size_t batch_size_in = 512)
+            : IndexFlatPanorama(d_in, METRIC_L2, n_levels_in, batch_size_in) {}
+};
+
+struct IndexFlatIPPanorama : IndexFlatPanorama {
+    /**
+     * @param d dimensionality of the input vectors
+     * @param n_levels number of Panorama levels
+     * @param batch_size batch size for Panorama storage
+     */
+    explicit IndexFlatIPPanorama(
+            idx_t d_in,
+            size_t n_levels_in,
+            size_t batch_size_in = 512)
+            : IndexFlatPanorama(
+                      d_in,
+                      METRIC_INNER_PRODUCT,
+                      n_levels_in,
+                      batch_size_in) {}
+};
+
+/**
+ * Flat L2 storage with row-interleaved Panorama cumulative sums.
+ *
+ * Each row in `codes` is laid out as
+ *
+ *   [ cum_sums (n_levels+1 floats) | xb (d floats) ]
+ *
+ * so a single cache-line fetch covers both the cum-sums needed for
+ * Panorama pruning and the start of the vector data, removing the
+ * standalone cum_sums-side cache miss that the legacy two-buffer layout
+ * incurred per visited candidate during HNSW-Panorama search.
+ *
+ * This index is only intended as the inner storage of
+ * `IndexHNSWFlatPanorama`. It is metric-L2 only and reuses the standard
+ * `FlatL2Dis` distance computer by exposing the vector-data offset
+ * inside each row via a custom `get_FlatCodesDistanceComputer` override.
+ *
+ * `code_size = (d + n_levels + 1) * sizeof(float)`.
+ */
+struct IndexFlatPanoramaInline : IndexFlatL2 {
+    size_t n_levels = 0;
+    /// Cum-sums computed via this helper, kept here so we can rebuild the
+    /// prefix on `sa_encode` without re-deriving it from raw vector data.
+    PanoramaFlat pano;
+    /// Number of cum-sum floats per row (= n_levels + 1).
+    size_t cs_per_row = 0;
+
+    IndexFlatPanoramaInline() = default;
+
+    explicit IndexFlatPanoramaInline(idx_t d_in, size_t n_levels_in);
+
+    /// Encodes `n` rows. Each output row is the concatenation of the row's
+    /// cumulative sums (computed from `x`) followed by the raw float vector.
+    void sa_encode(idx_t n, const float* x, uint8_t* bytes) const override;
+
+    /// Skips the cum-sums prefix and copies the `d` raw floats out.
+    void sa_decode(idx_t n, const uint8_t* bytes, float* x) const override;
+
+    /// Skips the cum-sums prefix and copies the `d` raw floats out.
+    void reconstruct(idx_t key, float* recons) const override;
+
+    /// Bulk reconstruct, skipping each row's cum-sums prefix.
+    void reconstruct_n(idx_t i0, idx_t ni, float* recons) const override;
+
+    /// Distance computer that reads vector data starting at the cum-sums
+    /// offset within each row. The base `FlatL2Dis` already strides by
+    /// `code_size`, so we just rebase `codes` by the prefix size.
+    FlatCodesDistanceComputer* get_FlatCodesDistanceComputer() const override;
+
+    /// Pointer to the cumulative sums of row `i` inside `codes`.
+    const float* get_cum_sum(idx_t i) const {
+        return reinterpret_cast<const float*>(codes.data()) +
+                static_cast<size_t>(i) * row_floats();
+    }
+
+    /// Pointer to the *vector data* portion of row `i` inside `codes`.
+    const float* get_inline_xb(idx_t i) const {
+        return get_cum_sum(i) + cs_per_row;
+    }
+
+    /// Number of floats per row in `codes` (= cs_per_row + d).
+    size_t row_floats() const {
+        return cs_per_row + static_cast<size_t>(d);
+    }
+};
+
+/// optimized version for 1D "vectors".
+struct IndexFlat1D : IndexFlatL2 {
+    bool continuous_update = true; ///< is the permutation updated continuously?
+
+    std::vector<idx_t> perm; ///< sorted database indices
+
+    explicit IndexFlat1D(bool continuous_update = true);
+
+    /// if not continuous_update, call this between the last add and
+    /// the first search
+    void update_permutation();
+
+    void add(idx_t n, const float* x) override;
+
+    void reset() override;
+
+    /// Warn: the distances returned are L1 not L2
+    void search(
+            idx_t n,
+            const float* x,
+            idx_t k,
+            float* distances,
+            idx_t* labels,
+            const SearchParameters* params = nullptr) const override;
+};
+
+} // namespace faiss
+
+#endif

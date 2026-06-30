@@ -1,0 +1,13 @@
+Using OPTIMIZE AVX512 
+Computing ground truth for 10% subset (100000 vectors)...
+Database: 100000 x 960, Queries: 1000, Train: 50000
+====== PCA+Spill+Rot + IVFPQPanorama (M=960)
+	nprobe   1, Recall@10: 0.322400, speed: 0.287982 ms/query, QPS: 3472.4, dims scanned: 29.8%
+	nprobe   2, Recall@10: 0.493700, speed: 0.393271 ms/query, QPS: 2542.8, dims scanned: 22.4%
+	nprobe   4, Recall@10: 0.684700, speed: 0.525588 ms/query, QPS: 1902.6, dims scanned: 18.0%
+	nprobe   8, Recall@10: 0.838900, speed: 0.747636 ms/query, QPS: 1337.5, dims scanned: 15.1%
+	nprobe  16, Recall@10: 0.938400, speed: 1.141644 ms/query, QPS: 875.9, dims scanned: 13.0%
+	nprobe  32, Recall@10: 0.977700, speed: 1.728758 ms/query, QPS: 578.5, dims scanned: 11.3%
+	nprobe  64, Recall@10: 0.984100, speed: 2.507280 ms/query, QPS: 398.8, dims scanned: 9.6%
+
+Benchmark complete! Plot saved to bench_ivfpq_panorama.png

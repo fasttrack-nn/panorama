@@ -1,0 +1,107 @@
+# Prerequisites
+*.d
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Linker files
+*.ilk
+
+# Debugger Files
+*.pdb
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+
+# debug information files
+*.dwo
+
+# VSC
+.DS_Store
+Thumbs.db
+
+# Cmake and Build
+build/
+.cache/
+cmake-build-*/
+out/
+bin/
+obj/
+.cmake
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+CTestTestfile.cmake
+Makefile
+install_manifest.txt
+compile_commands.json
+CMakeUserPresets.json
+DartConfiguration.
+__cmake_systeminformation/
+tests/cmake_test_discovery_*.json
+
+.claude/
+
+*.cmake
+*.ipynb_checkpoints
+*.db
+*.lock
+
+# Clion
+.idea/
+
+# Python
+__pycache__/
+*.ipynb
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+*.egg
+.eggs/
+.pytest_cache/
+.mypy_cache/
+*.so
+
+# Others
+Testing
+
+venv
+.venv
+
+*.bin
+!tests/test_data.bin
+*.png
+*.hdf5
+!benchmarks/results/plots/github_*.png
+!benchmarks/results/plots/comparison_*.png
+*.eps
+
+_deps
+_deps/
+
+DartConfiguration.tcl

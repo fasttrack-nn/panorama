@@ -1,0 +1,14 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+.direnv
+plot.png
+fashion-mnist-784-euclidean.hdf5
+fashion-mnist-784-euclidean-queries.hdf5
